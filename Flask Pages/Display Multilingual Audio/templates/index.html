@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translated Audio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        textarea {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px; /* Add margin to create spacing outside the box */
+    }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        audio {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 400px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<!-- ... other HTML code ... -->
+<body>
+  <h1>Translated Audio</h1>
+  <form method="POST" action="{{ url_for('index') }}">
+      
+      <textarea name="text" rows="6" required>{{ text }}</textarea>
+      <label for="dest_language">Select Destination Language:</label>
+      <select name="dest_language" id="dest_language">
+          {% for lang in languages %}
+              <option value="{{ lang }}" {% if lang == dest_language %}selected{% endif %}>{{ lang }}</option>
+          {% endfor %}
+      </select>
+      <br>
+      <input type="submit" value="Translate">
+  </form>
+
+  {% if audio_data %}
+      <h2>Audio Translation:</h2>
+      <audio controls>
+          <source src="{{ url_for('audio', dest_language=dest_language) }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+      </audio>
+  {% endif %}
+
+  
+</body>
+<!-- ... other HTML code ... -->
+
+</html>

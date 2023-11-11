@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer and Translator</title>
+</head>
+<body>
+    <h1>Text Summarizer and Translator</h1>
+
+    <form method="POST" action="{{ url_for('process') }}">
+        <label for="text">Enter text to summarize:</label><br>
+        <textarea name="text" rows="4" cols="50" required></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if text %}
+        <h2>Original Text:</h2>
+        <p>{{ text }}</p>
+
+        <h2>Summary:</h2>
+        <p>{{ summary }}</p>
+
+        <h2>Translated Summary:</h2>
+        <p>{{ translation }}</p>
+    {% endif %}
+</body>
+</html>
